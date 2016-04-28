@@ -41,6 +41,7 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
             if(myDict["data"] != nil){
                 //print(myDict["data"])
                 let beerData = myDict["data"] as! Array<Dictionary<String, AnyObject>>
+               
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock({
                     for set in beerData {
@@ -69,7 +70,8 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
     var current = 0
     
     var filteredData:[String]!
-    
+    var searchActive: Bool = false
+    var filtered: [BeerSet] = []
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
@@ -93,13 +95,22 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) ->Int{
         print(BeerRepository.singleton.setArr.count)
+        if(searchActive) {
+            return filtered.count
+        }
         return BeerRepository.singleton.setArr.count
+        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! BevCell!
-        let set = BeerRepository.singleton.setArr[indexPath.row]
-        cell.beverageName.text = set.name
+        //let set = BeerRepository.singleton.setArr[indexPath.row]
+        if(searchActive){
+            cell.beverageName.text = filtered[indexPath.row].name
+        } else {
+            cell.beverageName.text = BeerRepository.singleton.setArr[indexPath.row].name;
+        }
+        //cell.beverageName.text = set.name
         return cell
     }
     
@@ -113,6 +124,24 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+         filtered = BeerRepository.singleton.setArr.filter({ (text) -> Bool in
+            let tmp: NSString = text.name
+            //print(searchText)
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+      //  print(filtered.count)
+        if(filtered.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        self.tableView.reloadData()
+    }
+
     
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        if(segue.identifier == "mySegue"){
