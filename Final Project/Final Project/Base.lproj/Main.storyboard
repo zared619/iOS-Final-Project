@@ -3,9 +3,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Beer List-->
         <scene sceneID="sWS-yk-dDl">
             <objects>
                 <tableViewController id="cWs-rK-dzy" customClass="MainViewController" customModule="Final_Project" customModuleProvider="target" sceneMemberID="viewController">
@@ -13,21 +14,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Ks2-ea-C5N">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="VBy-DQ-koP" customClass="BevCell" customModule="Final_Project" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VBy-DQ-koP" id="1nP-At-Xx9">
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3T-6W-1Cb">
-                                            <rect key="frame" x="24" y="11" width="91" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3T-6W-1Cb">
+                                            <rect key="frame" x="24" y="11" width="240" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="240" id="JOF-vv-w1E"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="e3T-6W-1Cb" firstAttribute="leading" secondItem="1nP-At-Xx9" secondAttribute="leadingMargin" constant="16" id="X2T-0n-go4"/>
+                                        <constraint firstItem="e3T-6W-1Cb" firstAttribute="centerY" secondItem="1nP-At-Xx9" secondAttribute="centerY" id="oT8-MR-ZbS"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="beverageName" destination="e3T-6W-1Cb" id="isv-ha-fzN"/>
@@ -39,7 +52,10 @@
                             <outlet property="delegate" destination="cWs-rK-dzy" id="8Ab-Np-frt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="rWM-vl-N9w"/>
+                    <navigationItem key="navigationItem" title="Beer List" id="rWM-vl-N9w"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Ks2-ea-C5N" id="0kA-FB-vtj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Fy-Qf-bXo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -91,8 +107,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8BH-1y-ngt" kind="relationship" relationship="viewControllers" id="Zz7-xF-9q1"/>
                         <segue destination="LR0-Nv-sWh" kind="relationship" relationship="viewControllers" id="4a9-28-8Ej"/>
+                        <segue destination="8BH-1y-ngt" kind="relationship" relationship="viewControllers" id="Zz7-xF-9q1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8KZ-bX-PnX" userLabel="First Responder" sceneMemberID="firstResponder"/>

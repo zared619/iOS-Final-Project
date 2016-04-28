@@ -15,7 +15,16 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
     
     private override init(){
         super.init()
-        let url = NSURL(string: "https://api.brewerydb.com/v2/beers?abv=-13&key=d6d3ba48e44a407ef82c7d9a20f7fcc7&format=json")
+        var i: Double = 2.0
+        while(i<13){
+            let str = "https://api.brewerydb.com/v2/beers?abv=" + String(i) + "," + String(i+0.05) + "&key=56f87afec88cd03f19d9bfa6fa67f16b&format=json"
+            makeAPICall(str)
+            i+=0.05
+        }
+    }
+    
+    func makeAPICall(str:String){
+        let url = NSURL(string: str)
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
         let dtask = session.downloadTaskWithURL(url!)
@@ -28,21 +37,26 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
         
         do{
             let myData = NSData(contentsOfURL: location)
-            let myDict = try NSJSONSerialization.JSONObjectWithData(myData!, options: NSJSONReadingOptions.MutableContainers) as! Array<Dictionary<String, AnyObject>>
-            
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                for set in myDict {
-                    let beerset = BeerSet()
-                    for (k,v) in set {
-                        if k == "name"{
-                            beerset.name = v as! String
-                        }
-                    }
-                    self.setArr.append(beerset)
-                }
-                self.downloadFinished = true
+            let myDict = try NSJSONSerialization.JSONObjectWithData(myData!, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
+            if(myDict["data"] != nil){
+                //print(myDict["data"])
+                let beerData = myDict["data"] as! Array<Dictionary<String, AnyObject>>
                 
-            })
+                NSOperationQueue.mainQueue().addOperationWithBlock({
+                    for set in beerData {
+                        let beerset = BeerSet()
+                        for (k,v) in set{
+                            if k == "name"{
+                                beerset.name = v as! String
+                            }
+                        }
+                        self.setArr.append(beerset)
+                    }
+                    self.downloadFinished = true
+                    
+                })
+            }
+            
             
         }catch{
             NSLog("Error")
@@ -50,18 +64,26 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
     }
 }
 
-class MainViewController: UITableViewController{
+class MainViewController: UITableViewController, UISearchBarDelegate{
     
     var current = 0
+    
+    var filteredData:[String]!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         BeerRepository.singleton.addObserver(self, forKeyPath: "downloadFinished", options: .New, context: nil)
         
+        searchBar.delegate = self
+        
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        BeerRepository.singleton.setArr.sortInPlace(){ $0.name > $1.name }
+        BeerRepository.singleton.setArr = BeerRepository.singleton.setArr.reverse()
         self.tableView.reloadData()
     }
     
@@ -70,6 +92,7 @@ class MainViewController: UITableViewController{
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) ->Int{
+        print(BeerRepository.singleton.setArr.count)
         return BeerRepository.singleton.setArr.count
     }
     
@@ -84,6 +107,7 @@ class MainViewController: UITableViewController{
         current = indexPath.row
         return indexPath
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
