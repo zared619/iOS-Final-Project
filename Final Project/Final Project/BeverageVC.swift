@@ -4,19 +4,23 @@
 
 import UIKit
 
-class BeerSet {
+class BeerSet: NSObject {
     var name: String = ""
+    var id: String = ""
+    var descript: String = ""
+    
 }
 
 class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
     var setArr:[BeerSet] = []
+    
     dynamic var downloadFinished = false
     static let singleton = BeerRepository()
     
     private override init(){
         super.init()
-        var i: Double = 2.0
-        while(i<13){
+        var i: Double = 3.0
+        while(i<5){
             let str = "https://api.brewerydb.com/v2/beers?abv=" + String(i) + "," + String(i+0.05) + "&key=56f87afec88cd03f19d9bfa6fa67f16b&format=json"
             makeAPICall(str)
             i+=0.05
@@ -32,23 +36,39 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
         dtask.resume()
     }
     
+    @IBAction func done(segue: UIStoryboardSegue) {
+        
+    }
+    @IBAction func cancel(segue: UIStoryboardSegue) {
+        
+        
+    }
+
+    
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         
         do{
             let myData = NSData(contentsOfURL: location)
             let myDict = try NSJSONSerialization.JSONObjectWithData(myData!, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
-            if(myDict["data"] != nil){
+            if let beerData = myDict["data"] as? Array<Dictionary<String, AnyObject>>{
                 //print(myDict["data"])
-                let beerData = myDict["data"] as! Array<Dictionary<String, AnyObject>>
+                //let beerData =
                
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock({
                     for set in beerData {
                         let beerset = BeerSet()
                         for (k,v) in set{
-                            if k == "name"{
+                            if k == "id" {
+                                beerset.id = v as! String
+                            }
+                            
+                            if k == "name" {
                                 beerset.name = v as! String
+                            }
+                            if k == "description" {
+                                beerset.descript = v as! String
                             }
                         }
                         self.setArr.append(beerset)
@@ -142,14 +162,25 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
         self.tableView.reloadData()
     }
 
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if(segue.identifier == "mySegue"){
-//            let dest = segue.destinationViewController as! setDisplayVC
-//            dest.url = NetRepository.singleton.setArr[current].url
-//            dest.number = NetRepository.singleton.setArr[current].number
-//            dest.cycle = NetRepository.singleton.setArr[current].cycleNumber
-//        }
-//    }
+    override func scrollViewDidScroll(scrollView: UIScrollView){
+        let tableBounds = self.tableView.bounds;
+        let searchBarFrame = self.searchBar.frame;
+        
+        // make sure the search bar stays at the table's original x and y as the content moves
+        self.searchBar.frame = CGRectMake(tableBounds.origin.x,
+                                          tableBounds.origin.y,
+                                          searchBarFrame.size.width,
+                                          searchBarFrame.size.height
+        )
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destVC = segue.destinationViewController as! UINavigationController
+        let date = destVC.childViewControllers[0] as! MoreDetails
+        if(searchActive) {
+            date.beer = filtered[current]
+        }
+        date.beer = BeerRepository.singleton.setArr[current]
+       
+    }
     
 }
