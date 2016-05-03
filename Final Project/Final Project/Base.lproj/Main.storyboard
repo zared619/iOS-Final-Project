@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gox-QF-Y1x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gox-QF-Y1x">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -62,57 +62,6 @@
             </objects>
             <point key="canvasLocation" x="1414" y="-339"/>
         </scene>
-        <!--View Controlle-->
-        <scene sceneID="RUq-j8-eZU">
-            <objects>
-                <viewController id="p2Q-go-lX3" customClass="ViewControlle" customModule="Final_Project" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="OQ2-dN-3V8"/>
-                        <viewControllerLayoutGuide type="bottom" id="rIZ-AH-mdJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="422-g8-6o8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eBS-bj-ZT3">
-                                <rect key="frame" x="-5" y="64" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HCm-fK-vVT">
-                                <rect key="frame" x="0.0" y="90" width="600" height="557"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ym7-xf-tMd" customClass="BevCell" customModule="Final_Project" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ym7-xf-tMd" id="mqc-fE-XzW">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ogn-Ov-33D">
-                                                    <rect key="frame" x="8" y="14" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="GiC-xD-iLY"/>
-                    <connections>
-                        <outlet property="searchBar" destination="eBS-bj-ZT3" id="D0O-jw-nHl"/>
-                        <outlet property="tableView" destination="HCm-fK-vVT" id="w77-3f-01Q"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3jS-xh-ILY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2242" y="496"/>
-        </scene>
         <!--More Details-->
         <scene sceneID="IxJ-Fe-sKY">
             <objects>
@@ -139,13 +88,19 @@
                                 <state key="normal" title="Add to Favorites"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Odh-8r-NDZ">
-                                <rect key="frame" x="20" y="300" width="340" height="175"/>
+                                <rect key="frame" x="20" y="212" width="340" height="175"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="340" id="IMp-YA-Elu"/>
                                     <constraint firstAttribute="height" constant="175" id="PET-dP-4yq"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SAB-DK-xgm">
+                                <rect key="frame" x="20" y="172" width="93" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -155,8 +110,10 @@
                             <constraint firstItem="aFZ-o3-WXt" firstAttribute="top" secondItem="y30-su-XHr" secondAttribute="bottom" constant="36" id="TAJ-GR-njq"/>
                             <constraint firstItem="Odh-8r-NDZ" firstAttribute="leading" secondItem="IMq-ne-Edv" secondAttribute="leadingMargin" id="VP7-ZL-nwE"/>
                             <constraint firstItem="V0j-96-mal" firstAttribute="centerX" secondItem="aFZ-o3-WXt" secondAttribute="centerX" id="YEW-Ab-Vsh"/>
+                            <constraint firstItem="Odh-8r-NDZ" firstAttribute="top" secondItem="SAB-DK-xgm" secondAttribute="bottom" constant="19" id="v8I-GL-ycO"/>
                             <constraint firstItem="V0j-96-mal" firstAttribute="centerX" secondItem="IMq-ne-Edv" secondAttribute="centerX" id="vuA-z3-QhT"/>
-                            <constraint firstItem="V0j-96-mal" firstAttribute="top" secondItem="Odh-8r-NDZ" secondAttribute="bottom" constant="26" id="z46-ZC-fDQ"/>
+                            <constraint firstItem="V0j-96-mal" firstAttribute="top" secondItem="Odh-8r-NDZ" secondAttribute="bottom" constant="114" id="z46-ZC-fDQ"/>
+                            <constraint firstItem="SAB-DK-xgm" firstAttribute="leading" secondItem="IMq-ne-Edv" secondAttribute="leadingMargin" id="zaa-QH-tEi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="dMc-Hn-7K4"/>
@@ -169,11 +126,11 @@
             </objects>
             <point key="canvasLocation" x="2163" y="-339"/>
         </scene>
-        <!--Item-->
+        <!--Beer List-->
         <scene sceneID="gkr-Zv-8t1">
             <objects>
                 <navigationController id="LR0-Nv-sWh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="QkP-sr-aGu"/>
+                    <tabBarItem key="tabBarItem" title="Beer List" id="QkP-sr-aGu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AH6-bo-t5G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -218,11 +175,11 @@
             </objects>
             <point key="canvasLocation" x="1414" y="332"/>
         </scene>
-        <!--Item-->
+        <!--Favorites-->
         <scene sceneID="meR-k7-5TW">
             <objects>
                 <navigationController id="eQf-fY-imM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="7Go-1S-pFl"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" id="7Go-1S-pFl"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wp3-wv-jPu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
