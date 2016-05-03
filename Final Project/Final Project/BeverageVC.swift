@@ -38,7 +38,7 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
         do{
             let myData = NSData(contentsOfURL: location)
             let myDict = try NSJSONSerialization.JSONObjectWithData(myData!, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
-            if(myDict["data"] != nil){
+            if(myDict["data"] != nil && myDict["message"] == nil){
                 //print(myDict["data"])
                 let beerData = myDict["data"] as! Array<Dictionary<String, AnyObject>>
                
