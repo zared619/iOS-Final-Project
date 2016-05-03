@@ -16,6 +16,8 @@
 		6F0A63B51CC91D610016A819 /* Final_ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A63B41CC91D610016A819 /* Final_ProjectUITests.swift */; };
 		6F0A63C31CC91F0F0016A819 /* cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A63C21CC91F0F0016A819 /* cell.swift */; };
 		6F0A63C51CC927640016A819 /* BeverageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A63C41CC927640016A819 /* BeverageVC.swift */; };
+		ECBAB6D01CD2D19000E2152E /* Beverage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBAB6CF1CD2D19000E2152E /* Beverage.swift */; };
+		ECBAB6D21CD5413800E2152E /* MoreDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBAB6D11CD5413800E2152E /* MoreDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		6F0A63B61CC91D610016A819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6F0A63C21CC91F0F0016A819 /* cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cell.swift; sourceTree = "<group>"; };
 		6F0A63C41CC927640016A819 /* BeverageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeverageVC.swift; sourceTree = "<group>"; };
+		ECBAB6CF1CD2D19000E2152E /* Beverage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Beverage.swift; sourceTree = "<group>"; };
+		ECBAB6D11CD5413800E2152E /* MoreDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +108,10 @@
 				6F0A63941CC91D610016A819 /* AppDelegate.swift */,
 				6F0A63961CC91D610016A819 /* ViewController.swift */,
 				6F0A63981CC91D610016A819 /* Main.storyboard */,
+				ECBAB6CF1CD2D19000E2152E /* Beverage.swift */,
 				6F0A63C41CC927640016A819 /* BeverageVC.swift */,
 				6F0A63C21CC91F0F0016A819 /* cell.swift */,
+				ECBAB6D11CD5413800E2152E /* MoreDetails.swift */,
 				6F0A639B1CC91D610016A819 /* Assets.xcassets */,
 				6F0A639D1CC91D610016A819 /* LaunchScreen.storyboard */,
 				6F0A63A01CC91D610016A819 /* Info.plist */,
@@ -265,6 +271,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECBAB6D01CD2D19000E2152E /* Beverage.swift in Sources */,
+				ECBAB6D21CD5413800E2152E /* MoreDetails.swift in Sources */,
 				6F0A63971CC91D610016A819 /* ViewController.swift in Sources */,
 				6F0A63C51CC927640016A819 /* BeverageVC.swift in Sources */,
 				6F0A63C31CC91F0F0016A819 /* cell.swift in Sources */,
@@ -493,6 +501,7 @@
 				6F0A63BB1CC91D610016A819 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6F0A63BC1CC91D610016A819 /* Build configuration list for PBXNativeTarget "Final ProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +510,7 @@
 				6F0A63BE1CC91D610016A819 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6F0A63BF1CC91D610016A819 /* Build configuration list for PBXNativeTarget "Final ProjectUITests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +519,7 @@
 				6F0A63C11CC91D610016A819 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
