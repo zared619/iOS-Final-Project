@@ -162,7 +162,7 @@ class Favorites: UITableViewController {
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-            let cell = tableView.dequeueReusableCellWithIdentifier("cell") as! BevCell!
+            let cell = tableView.dequeueReusableCellWithIdentifier("cells ") as! BevCell!
             //let set = BeerRepository.singleton.setArr[indexPath.row]
             print(FavRepo.singleton.setArr[indexPath.row].name)
             cell.beverageName.text = FavRepo.singleton.setArr[indexPath.row].name;
