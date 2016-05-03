@@ -19,7 +19,7 @@ class FavRepo: NSObject, NSURLSessionDownloadDelegate {
         super.init()
         //var i: Double = 3.0
         for i in ids{
-            let str = "https://api.brewerydb.com/v2/beers?ids= " + i + "&key=56f87afec88cd03f19d9bfa6fa67f16b&format=json"
+            let str = "https://api.brewerydb.com/v2/beers?ids=" + i + "&key=56f87afec88cd03f19d9bfa6fa67f16b&format=json"
             makeAPICall(str)
         }
     }
@@ -41,6 +41,7 @@ class FavRepo: NSObject, NSURLSessionDownloadDelegate {
         do{
             let myData = NSData(contentsOfURL: location)
             let myDict = try NSJSONSerialization.JSONObjectWithData(myData!, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
+            print(myData)
             if let beerData = myDict["data"] as? Array<Dictionary<String, AnyObject>>{
                 //print(myDict["data"])
                 //let beerData =
@@ -89,6 +90,10 @@ class Favorites: UITableViewController {
             super.viewDidLoad()
             // Do any additional setup after loading the view, typically from a nib.
             loadInfo()
+            print(ids)
+            FavRepo.singleton.addObserver(self, forKeyPath: "downloadFinished", options: .New, context: nil)
+            
+
             
         }
     let fileManager = NSFileManager.defaultManager()
@@ -107,7 +112,7 @@ class Favorites: UITableViewController {
             do{
                 data = try String(contentsOfFile: newPath)
                 for character in data.characters {
-                    if(character == ","){
+                    if(character == "," || character == "\n"){
                         ids.append(s)
                         s = ""
                     }else{
@@ -179,17 +184,7 @@ class Favorites: UITableViewController {
             self.tableView.reloadData()
         }
         
-        override func scrollViewDidScroll(scrollView: UIScrollView){
-            let tableBounds = self.tableView.bounds;
-            let searchBarFrame = self.searchBar.frame;
-            
-            // make sure the search bar stays at the table's original x and y as the content moves
-            self.searchBar.frame = CGRectMake(tableBounds.origin.x,
-                                              tableBounds.origin.y,
-                                              searchBarFrame.size.width,
-                                              searchBarFrame.size.height
-            )
-        }
+  
         override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let destVC = segue.destinationViewController as! MoreDetails
             if(searchActive) {

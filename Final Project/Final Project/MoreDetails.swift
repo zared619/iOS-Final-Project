@@ -27,6 +27,40 @@ class MoreDetails: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func Faves(sender: AnyObject) {
+        let documents = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+        let path = documents.URLByAppendingPathComponent("faves.txt").path!
+        print(path)
+        if let outputStream = NSOutputStream(toFileAtPath: path, append: true) {
+            outputStream.open()
+            let text = beer!.id + ",\n"
+            outputStream.write(text,maxLength: 10)
+            
+            outputStream.close()
+        } else {
+            print("Unable to open file")
+        }
+        
+        
+        /*let str : NSString = NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true)[0]
+        let path = str.stringByAppendingPathComponent("faves.txt")
+        print(path)
+        do{
+            if let out = NSOutputStream(toFileAtPath: "faves.txt", append: true){
+                let text = beer!.id + ",\n"
+                out.write(text, maxLength: 100)
+                out.close()
+            }
+            //let texts = ""
+            //try texts.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding)
+            
+            
+        } catch{
+            print("error")
+        }*/
+        
+    }
    // @IBAction func done(segue: UIStoryboardSegue) {
    //     self.dismissViewControllerAnimated(true, completion: nil)
    // }
