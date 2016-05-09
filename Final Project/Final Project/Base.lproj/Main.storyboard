@@ -155,24 +155,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cells" id="SmH-Iy-cob" userLabel="cell" customClass="BevCell" customModule="Final_Project" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cells" id="SmH-Iy-cob" customClass="BevCell" customModule="Final_Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SmH-Iy-cob" id="Z0n-Xx-Lo1">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rG8-sJ-MBw">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rG8-sJ-MBw">
                                             <rect key="frame" x="8" y="11" width="285" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="285" id="gHB-2a-9e6"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="rG8-sJ-MBw" firstAttribute="centerY" secondItem="Z0n-Xx-Lo1" secondAttribute="centerY" id="7Pk-lU-fC5"/>
+                                        <constraint firstItem="rG8-sJ-MBw" firstAttribute="leading" secondItem="Z0n-Xx-Lo1" secondAttribute="leadingMargin" id="Qbg-kb-pfE"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="beverageName" destination="rG8-sJ-MBw" id="ZGz-Ma-u9p"/>
-                                    <segue destination="zzt-lo-JW4" kind="show" trigger="accessoryAction" id="P7j-iT-Fts"/>
+                                    <outlet property="beverageName" destination="rG8-sJ-MBw" id="fBI-U3-xdK"/>
+                                    <segue destination="zzt-lo-JW4" kind="show" id="RIn-5e-5ww"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -181,7 +188,7 @@
                             <outlet property="delegate" destination="VWe-FK-MsB" id="g11-Ps-vUZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="a6W-le-lps"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="a6W-le-lps"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="965-DJ-t7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -224,6 +231,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="P7j-iT-Fts"/>
+        <segue reference="RIn-5e-5ww"/>
     </inferredMetricsTieBreakers>
 </document>

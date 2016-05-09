@@ -114,7 +114,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) ->Int{
-        print(BeerRepository.singleton.setArr.count)
+      //  print(BeerRepository.singleton.setArr.count)
         if(searchActive) {
             return filtered.count
         }
@@ -178,7 +178,9 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
             if(searchActive) {
                 destVC.beer = filtered[current]
             }
-            destVC.beer = BeerRepository.singleton.setArr[current]
+            else{
+                destVC.beer = BeerRepository.singleton.setArr[current]
+        }
        
     }
     

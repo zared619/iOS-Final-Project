@@ -119,9 +119,6 @@ class Favorites: UITableViewController {
         }
         override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let destVC = segue.destinationViewController as! MoreDetails
-            if(searchActive) {
-                destVC.beer = filtered[current]
-            }
             destVC.beer = FavRepo.singleton.setArr[current]
             
         }
