@@ -9,84 +9,20 @@
 import UIKit
 
 var ids: [String] = []
-class FavRepo: NSObject, NSURLSessionDownloadDelegate {
-    var setArr:[BeerSet] = []
-    
+class FavRepo: NSObject {
+    dynamic var setArr:[BeerSet] = []
     dynamic var downloadFinished = false
     static let singleton = FavRepo()
     
-    private override init(){
-        super.init()
-        //var i: Double = 3.0
-        var str = "https://api.brewerydb.com/v2/beers?ids="
-        var count = 0
-        for i in ids{
-            print(i)
-            if count == ids.count-1 {
-                str += i
-            }else{
-                str += i + ","
-            }
-            count += 1
-       }
-        str += "&key=56f87afec88cd03f19d9bfa6fa67f16b&format=json"
-        makeAPICall(str)
-    }
     
-    func makeAPICall(str:String){
-        let url = NSURL(string: str)
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
-        let dtask = session.downloadTaskWithURL(url!)
-        
-        dtask.resume()
-    }
-
-    
-    
-    
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
-        
-        do{
-            let myData = NSData(contentsOfURL: location)
-            let myDict = try NSJSONSerialization.JSONObjectWithData(myData!, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
-            if let beerData = myDict["data"] as? Array<Dictionary<String, AnyObject>>{
-                //print(myDict["data"])
-                //let beerData =
-                
-                
-                NSOperationQueue.mainQueue().addOperationWithBlock({
-                    for set in beerData {
-                        let beerset = BeerSet()
-                        for (k,v) in set{
-                            if k == "id" {
-                                beerset.id = v as! String
-                            }
-                            
-                            if k == "name" {
-                                beerset.name = v as! String
-                            }
-                            if k == "description" {
-                                beerset.descript = v as! String
-                            }
-                        }
-                        self.setArr.append(beerset)
-                    }
-                    self.downloadFinished = true
-                    
-                })
-            }
-            
-            
-        }catch{
-            NSLog("Error")
-        }
-    }
 }
 
 class Favorites: UITableViewController {
 
     var beerInfo: [BeerSet] = []
+    let fileManager = NSFileManager.defaultManager()
+    
+    var s = ""
         var current = 0
         
         var filteredData:[String]!
@@ -96,22 +32,22 @@ class Favorites: UITableViewController {
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            //FavRepo.singleton.setArr = []
             // Do any additional setup after loading the view, typically from a nib.
-            loadInfo()
-            print(ids)
-            FavRepo.singleton.addObserver(self, forKeyPath: "downloadFinished", options: .New, context: nil)
-            print(FavRepo.singleton.setArr)
-
+            //loadInfo()
+            //print(ids)
+            FavRepo.singleton.addObserver(self, forKeyPath: "setArr", options: .New, context: nil)
+           // print(FavRepo.singleton.setArr.count)
+            self.tableView.delegate = self
+            self.tableView.dataSource = self
             
         }
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        FavRepo.singleton.setArr.sortInPlace(){ $0.name > $1.name }
-        FavRepo.singleton.setArr = BeerRepository.singleton.setArr.reverse()
+        //FavRepo.singleton.setArr.sortInPlace(){ $0.name > $1.name }
+        //FavRepo.singleton.setArr = FavRepo.singleton.setArr.reverse()
         self.tableView.reloadData()
     }
-    let fileManager = NSFileManager.defaultManager()
-    
-    var s = ""
+   
     //var data = NSData()
     func loadInfo(){
         
@@ -162,9 +98,9 @@ class Favorites: UITableViewController {
         }
         
         override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-            let cell = tableView.dequeueReusableCellWithIdentifier("cells ") as! BevCell!
+            let cell = tableView.dequeueReusableCellWithIdentifier("cells") as! BevCell!
             //let set = BeerRepository.singleton.setArr[indexPath.row]
-            print(FavRepo.singleton.setArr[indexPath.row].name)
+           // print(FavRepo.singleton.setArr[indexPath.row].name)
             cell.beverageName.text = FavRepo.singleton.setArr[indexPath.row].name;
             
             //cell.beverageName.text = set.name
@@ -183,9 +119,6 @@ class Favorites: UITableViewController {
         }
         override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let destVC = segue.destinationViewController as! MoreDetails
-            if(searchActive) {
-                destVC.beer = filtered[current]
-            }
             destVC.beer = FavRepo.singleton.setArr[current]
             
         }

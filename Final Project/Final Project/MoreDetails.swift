@@ -62,6 +62,10 @@ class MoreDetails: UIViewController {
         } catch{
             print("error")
         }*/
+        print(FavRepo.singleton.setArr.count)
+        FavRepo.singleton.setArr.append(beer!)
+        print(FavRepo.singleton.setArr.count)
+
         
     }
    // @IBAction func done(segue: UIStoryboardSegue) {
