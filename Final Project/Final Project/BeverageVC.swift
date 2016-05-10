@@ -89,6 +89,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate, Details{
     var filtered: [BeerSet] = []
     var visited : [Int] = []
     var visit = false
+    var randNum = 0
     
     var randomPressed = false
     @IBOutlet weak var searchBar: UISearchBar!
@@ -188,7 +189,10 @@ class MainViewController: UITableViewController, UISearchBarDelegate, Details{
     func childDone(vc: MoreDetails){
         if(searchActive){
             filtered[current].fav = true
-        }else{
+        }else if(randomPressed){
+            BeerRepository.singleton.setArr[randNum].fav = true
+        }
+        else{
             BeerRepository.singleton.setArr[current].fav = true
         }
         
@@ -199,7 +203,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate, Details{
             let destVC = segue.destinationViewController as! MoreDetails
             destVC.delegate = self
             if randomPressed {
-                let randNum = Int(arc4random_uniform(UInt32(self.cellCount)) + 1)
+                randNum = Int(arc4random_uniform(UInt32(self.cellCount)) + 1)
                 destVC.beer = BeerRepository.singleton.setArr[randNum]
                 destVC.visit = visit
             }else{
