@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gox-QF-Y1x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gox-QF-Y1x">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -106,13 +106,22 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTX-oQ-6SS">
+                                <rect key="frame" x="379" y="501" width="111" height="30"/>
+                                <state key="normal" title="Tweet This Beer"/>
+                                <connections>
+                                    <action selector="handleTweetButtonTapped:" destination="zzt-lo-JW4" eventType="touchDown" id="bNC-bn-ONj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="GTX-oQ-6SS" firstAttribute="baseline" secondItem="V0j-96-mal" secondAttribute="baseline" id="M4a-dp-tyW"/>
                             <constraint firstItem="Oam-Lh-SMm" firstAttribute="top" secondItem="V0j-96-mal" secondAttribute="bottom" constant="20" id="SNY-co-OXa"/>
                             <constraint firstItem="aFZ-o3-WXt" firstAttribute="top" secondItem="y30-su-XHr" secondAttribute="bottom" constant="36" id="TAJ-GR-njq"/>
                             <constraint firstItem="Odh-8r-NDZ" firstAttribute="leading" secondItem="IMq-ne-Edv" secondAttribute="leadingMargin" id="VP7-ZL-nwE"/>
                             <constraint firstItem="V0j-96-mal" firstAttribute="centerX" secondItem="aFZ-o3-WXt" secondAttribute="centerX" id="YEW-Ab-Vsh"/>
+                            <constraint firstItem="GTX-oQ-6SS" firstAttribute="leading" secondItem="V0j-96-mal" secondAttribute="trailing" constant="23" id="klp-lP-na2"/>
                             <constraint firstItem="Odh-8r-NDZ" firstAttribute="top" secondItem="SAB-DK-xgm" secondAttribute="bottom" constant="19" id="v8I-GL-ycO"/>
                             <constraint firstItem="V0j-96-mal" firstAttribute="centerX" secondItem="IMq-ne-Edv" secondAttribute="centerX" id="vuA-z3-QhT"/>
                             <constraint firstItem="V0j-96-mal" firstAttribute="top" secondItem="Odh-8r-NDZ" secondAttribute="bottom" constant="114" id="z46-ZC-fDQ"/>

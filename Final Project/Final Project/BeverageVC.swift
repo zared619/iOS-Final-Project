@@ -162,17 +162,7 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
         self.tableView.reloadData()
     }
 
-    override func scrollViewDidScroll(scrollView: UIScrollView){
-        let tableBounds = self.tableView.bounds;
-        let searchBarFrame = self.searchBar.frame;
-        
-        // make sure the search bar stays at the table's original x and y as the content moves
-        self.searchBar.frame = CGRectMake(tableBounds.origin.x,
-                                          tableBounds.origin.y,
-                                          searchBarFrame.size.width,
-                                          searchBarFrame.size.height
-        )
-    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let destVC = segue.destinationViewController as! MoreDetails
             if(searchActive) {

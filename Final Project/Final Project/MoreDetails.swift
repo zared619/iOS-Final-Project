@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class MoreDetails: UIViewController {
 
@@ -68,6 +69,22 @@ class MoreDetails: UIViewController {
 
         
     }
+    
+    @IBAction func handleTweetButtonTapped(sender: UIButton) {
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
+            let tweetVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            tweetVC.setInitialText(
+                "Really enjoying " + beer!.name +  " check it out!!" )
+            self.presentViewController(tweetVC, animated: true, completion: nil)
+        }
+            else {
+            let alert = UIAlertController(title: "Cannot find twitter please log in", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+                }
+    }
+
+    
    // @IBAction func done(segue: UIStoryboardSegue) {
    //     self.dismissViewControllerAnimated(true, completion: nil)
    // }
