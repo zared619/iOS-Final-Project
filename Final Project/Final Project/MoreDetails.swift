@@ -18,11 +18,15 @@ class MoreDetails: UIViewController {
     @IBOutlet weak var label1: UILabel?
     @IBOutlet weak var name: UILabel?
     @IBOutlet weak var website: UIWebView?
-    
-    var beer: BeerSet?
+     
     var delegate: Details!
 
     
+    @IBOutlet weak var butt: UIBarButtonItem!
+    var beer: BeerSet? 
+    var count = 0
+    var visit: Bool?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if beer?.descript == "" {
@@ -30,6 +34,11 @@ class MoreDetails: UIViewController {
         }
         label1?.text = beer?.descript
         name!.text = beer?.name
+        if visit!{
+            butt.enabled = false
+        }else{
+            butt.enabled = true
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -42,7 +51,10 @@ class MoreDetails: UIViewController {
     
     @IBAction func Faves(sender: AnyObject) {
         delegate.childDone(self)
-        
+
+       
+        butt.enabled = false
+
         let documents = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
         let path = documents.URLByAppendingPathComponent("faves.txt").path!
         print(path)
@@ -55,7 +67,9 @@ class MoreDetails: UIViewController {
         } else {
             print("Unable to open file")
         }
-        
+        print(FavRepo.singleton.setArr.count)
+        FavRepo.singleton.setArr.append(beer!)
+        print(FavRepo.singleton.setArr.count)
         
         /*let str : NSString = NSSearchPathForDirectoriesInDomains(.LibraryDirectory, .UserDomainMask, true)[0]
         let path = str.stringByAppendingPathComponent("faves.txt")
@@ -73,12 +87,11 @@ class MoreDetails: UIViewController {
         } catch{
             print("error")
         }*/
-        print(FavRepo.singleton.setArr.count)
-        FavRepo.singleton.setArr.append(beer!)
-        print(FavRepo.singleton.setArr.count)
+       
 
         
     }
+    
     
     @IBAction func handleTweetButtonTapped(sender: UIButton) {
         if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){

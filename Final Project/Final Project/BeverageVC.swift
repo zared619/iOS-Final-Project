@@ -36,14 +36,7 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
         
         dtask.resume()
     }
-    
-    @IBAction func done(segue: UIStoryboardSegue) {
-        
-    }
-    @IBAction func cancel(segue: UIStoryboardSegue) {
-        
-        
-    }
+
 
     
     
@@ -89,17 +82,27 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
 class MainViewController: UITableViewController, UISearchBarDelegate, Details{
     
     var current = 0
+    var cellCount = 0
     
     var filteredData:[String]!
     var searchActive: Bool = false
     var filtered: [BeerSet] = []
+    var visited : [Int] = []
+    var visit = false
+    
+    var randomPressed = false
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBAction func randPress() {
+        randomPressed = true
+        performSegueWithIdentifier("random", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         BeerRepository.singleton.addObserver(self, forKeyPath: "downloadFinished", options: .New, context: nil)
-        
+
         searchBar.delegate = self
         
     }
@@ -143,12 +146,19 @@ class MainViewController: UITableViewController, UISearchBarDelegate, Details{
                 cell.beverageName.textColor = UIColor.blackColor()
             }
         }
-        //cell.beverageName.text = set.name
+        cellCount += 1
         return cell
     }
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        randomPressed = false
         current = indexPath.row
+        if visited.contains(current){
+            visit = true
+        }else{
+            visit = false
+            visited.append(current)
+        }
         return indexPath
     }
     
@@ -188,13 +198,20 @@ class MainViewController: UITableViewController, UISearchBarDelegate, Details{
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let destVC = segue.destinationViewController as! MoreDetails
             destVC.delegate = self
+            if randomPressed {
+                let randNum = Int(arc4random_uniform(UInt32(self.cellCount)) + 1)
+                destVC.beer = BeerRepository.singleton.setArr[randNum]
+                destVC.visit = visit
+            }else{
             if(searchActive) {
                 destVC.beer = filtered[current]
+                destVC.visit = visit
             }
             else{
                 destVC.beer = BeerRepository.singleton.setArr[current]
+                destVC.visit = visit
+            }
         }
-       
     }
     
 }

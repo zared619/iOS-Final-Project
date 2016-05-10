@@ -83,8 +83,6 @@ class Favorites: UITableViewController {
             }
         }
     }
-
- 
         
         override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
             return 1
@@ -120,6 +118,7 @@ class Favorites: UITableViewController {
         override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let destVC = segue.destinationViewController as! MoreDetails
             destVC.beer = FavRepo.singleton.setArr[current]
+            destVC.visit = true
             
         }
         

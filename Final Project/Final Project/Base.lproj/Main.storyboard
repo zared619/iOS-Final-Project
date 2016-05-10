@@ -53,7 +53,21 @@
                             <outlet property="delegate" destination="cWs-rK-dzy" id="8Ab-Np-frt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Beer List" id="rWM-vl-N9w"/>
+                    <navigationItem key="navigationItem" title="Beer List" id="rWM-vl-N9w">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="N0r-lB-aLA">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="B04-E5-SB9">
+                                <rect key="frame" x="447" y="7" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Random Beer"/>
+                                <connections>
+                                    <action selector="randPress" destination="cWs-rK-dzy" eventType="touchUpInside" id="4Yg-Q6-cdK"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <segue destination="zzt-lo-JW4" kind="show" identifier="random" id="c0X-Ip-zoX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="Ks2-ea-C5N" id="0kA-FB-vtj"/>
                     </connections>
@@ -83,13 +97,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0j-96-mal">
-                                <rect key="frame" x="244" y="501" width="112" height="30"/>
-                                <state key="normal" title="Add to Favorites"/>
-                                <connections>
-                                    <action selector="Faves:" destination="zzt-lo-JW4" eventType="touchDown" id="jyt-HN-lR0"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Odh-8r-NDZ">
                                 <rect key="frame" x="20" y="212" width="340" height="175"/>
                                 <constraints>
@@ -107,7 +114,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTX-oQ-6SS">
-                                <rect key="frame" x="379" y="501" width="111" height="30"/>
+                                <rect key="frame" x="244" y="437" width="111" height="30"/>
                                 <state key="normal" title="Tweet This Beer"/>
                                 <connections>
                                     <action selector="handleTweetButtonTapped:" destination="zzt-lo-JW4" eventType="touchDown" id="bNC-bn-ONj"/>
@@ -116,20 +123,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GTX-oQ-6SS" firstAttribute="baseline" secondItem="V0j-96-mal" secondAttribute="baseline" id="M4a-dp-tyW"/>
-                            <constraint firstItem="Oam-Lh-SMm" firstAttribute="top" secondItem="V0j-96-mal" secondAttribute="bottom" constant="20" id="SNY-co-OXa"/>
+                            <constraint firstItem="Oam-Lh-SMm" firstAttribute="top" secondItem="GTX-oQ-6SS" secondAttribute="bottom" constant="84" id="1Zo-GH-617"/>
+                            <constraint firstItem="GTX-oQ-6SS" firstAttribute="centerX" secondItem="aFZ-o3-WXt" secondAttribute="centerX" id="JSe-qm-0Uo"/>
                             <constraint firstItem="aFZ-o3-WXt" firstAttribute="top" secondItem="y30-su-XHr" secondAttribute="bottom" constant="36" id="TAJ-GR-njq"/>
                             <constraint firstItem="Odh-8r-NDZ" firstAttribute="leading" secondItem="IMq-ne-Edv" secondAttribute="leadingMargin" id="VP7-ZL-nwE"/>
-                            <constraint firstItem="V0j-96-mal" firstAttribute="centerX" secondItem="aFZ-o3-WXt" secondAttribute="centerX" id="YEW-Ab-Vsh"/>
-                            <constraint firstItem="GTX-oQ-6SS" firstAttribute="leading" secondItem="V0j-96-mal" secondAttribute="trailing" constant="23" id="klp-lP-na2"/>
+                            <constraint firstItem="GTX-oQ-6SS" firstAttribute="centerX" secondItem="IMq-ne-Edv" secondAttribute="centerX" id="aPF-BM-B58"/>
+                            <constraint firstItem="GTX-oQ-6SS" firstAttribute="top" secondItem="Odh-8r-NDZ" secondAttribute="bottom" constant="50" id="h3X-Nw-U4H"/>
                             <constraint firstItem="Odh-8r-NDZ" firstAttribute="top" secondItem="SAB-DK-xgm" secondAttribute="bottom" constant="19" id="v8I-GL-ycO"/>
-                            <constraint firstItem="V0j-96-mal" firstAttribute="centerX" secondItem="IMq-ne-Edv" secondAttribute="centerX" id="vuA-z3-QhT"/>
-                            <constraint firstItem="V0j-96-mal" firstAttribute="top" secondItem="Odh-8r-NDZ" secondAttribute="bottom" constant="114" id="z46-ZC-fDQ"/>
                             <constraint firstItem="SAB-DK-xgm" firstAttribute="leading" secondItem="IMq-ne-Edv" secondAttribute="leadingMargin" id="zaa-QH-tEi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="dMc-Hn-7K4"/>
+                    <navigationItem key="navigationItem" id="dMc-Hn-7K4">
+                        <barButtonItem key="rightBarButtonItem" title="Add to Favorites" id="LgT-lw-NYL">
+                            <connections>
+                                <action selector="Faves:" destination="zzt-lo-JW4" id="DzA-25-1Km"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="butt" destination="LgT-lw-NYL" id="c6w-gT-jat"/>
                         <outlet property="label1" destination="Odh-8r-NDZ" id="cNN-PZ-Eq7"/>
                         <outlet property="name" destination="aFZ-o3-WXt" id="l6h-2S-W1D"/>
                     </connections>
@@ -240,6 +252,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="RIn-5e-5ww"/>
+        <segue reference="c0X-Ip-zoX"/>
     </inferredMetricsTieBreakers>
 </document>
