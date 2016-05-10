@@ -83,7 +83,13 @@ class Favorites: UITableViewController {
             }
         }
     }
-
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            FavRepo.singleton.setArr.removeAtIndex(indexPath.row)
+            //tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            tableView.reloadData()
+        }
+    }
  
         
         override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -120,6 +126,7 @@ class Favorites: UITableViewController {
         override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let destVC = segue.destinationViewController as! MoreDetails
             destVC.beer = FavRepo.singleton.setArr[current]
+            destVC.visit = true
             
         }
         

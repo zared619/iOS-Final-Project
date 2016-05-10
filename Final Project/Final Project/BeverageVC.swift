@@ -92,6 +92,8 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
     var filteredData:[String]!
     var searchActive: Bool = false
     var filtered: [BeerSet] = []
+    var visited : [Int] = []
+    var visit = false
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
@@ -136,6 +138,12 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
     
     override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         current = indexPath.row
+        if visited.contains(current){
+            visit = true
+        }else{
+            visit = false
+            visited.append(current)
+        }
         return indexPath
     }
     
@@ -167,9 +175,11 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
             let destVC = segue.destinationViewController as! MoreDetails
             if(searchActive) {
                 destVC.beer = filtered[current]
+                destVC.visit = visit
             }
             else{
                 destVC.beer = BeerRepository.singleton.setArr[current]
+                destVC.visit = visit
         }
        
     }
