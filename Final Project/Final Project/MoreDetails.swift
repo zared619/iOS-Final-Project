@@ -9,13 +9,19 @@
 import UIKit
 import Social
 
+protocol Details{
+    func childDone(vc: MoreDetails)
+}
+
 class MoreDetails: UIViewController {
 
     @IBOutlet weak var label1: UILabel?
     @IBOutlet weak var name: UILabel?
     @IBOutlet weak var website: UIWebView?
     
-    var beer: BeerSet? 
+    var beer: BeerSet?
+    var delegate: Details!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +38,11 @@ class MoreDetails: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
     @IBAction func Faves(sender: AnyObject) {
+        delegate.childDone(self)
+        
         let documents = try! NSFileManager.defaultManager().URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
         let path = documents.URLByAppendingPathComponent("faves.txt").path!
         print(path)

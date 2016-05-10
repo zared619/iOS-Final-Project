@@ -8,6 +8,7 @@ class BeerSet: NSObject {
     var name: String = ""
     var id: String = ""
     var descript: String = ""
+    var fav:Bool = false
     
 }
 
@@ -85,7 +86,7 @@ class BeerRepository: NSObject, NSURLSessionDownloadDelegate {
     }
 }
 
-class MainViewController: UITableViewController, UISearchBarDelegate{
+class MainViewController: UITableViewController, UISearchBarDelegate, Details{
     
     var current = 0
     
@@ -127,8 +128,20 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
         //let set = BeerRepository.singleton.setArr[indexPath.row]
         if(searchActive){
             cell.beverageName.text = filtered[indexPath.row].name
+            if filtered[indexPath.row].fav == true{
+                cell.beverageName.textColor = UIColor.blueColor()
+            }
+            else{
+                cell.beverageName.textColor = UIColor.blackColor()
+            }
         } else {
             cell.beverageName.text = BeerRepository.singleton.setArr[indexPath.row].name;
+            if BeerRepository.singleton.setArr[indexPath.row].fav == true{
+                cell.beverageName.textColor = UIColor.blueColor()
+            }
+            else{
+                cell.beverageName.textColor = UIColor.blackColor()
+            }
         }
         //cell.beverageName.text = set.name
         return cell
@@ -162,9 +175,19 @@ class MainViewController: UITableViewController, UISearchBarDelegate{
         self.tableView.reloadData()
     }
 
+    func childDone(vc: MoreDetails){
+        if(searchActive){
+            filtered[current].fav = true
+        }else{
+            BeerRepository.singleton.setArr[current].fav = true
+        }
+        
+        self.tableView.reloadData()
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
             let destVC = segue.destinationViewController as! MoreDetails
+            destVC.delegate = self
             if(searchActive) {
                 destVC.beer = filtered[current]
             }
