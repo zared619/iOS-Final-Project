@@ -18,6 +18,9 @@ class MoreDetails: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if beer?.descript == "" {
+            beer?.descript = "No description available"
+        }
         label1?.text = beer?.descript
         name!.text = beer?.name
         // Do any additional setup after loading the view.
